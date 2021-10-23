@@ -28,7 +28,7 @@ public class SimpleFramework {
 			.load();
 		*/
 		
-		// MongoDB Connecction
+		// MongoDB Connection
 		Dataset<Row> source_df = MongoSpark.load(jsc).toDF();
 		
 		source_df.createOrReplaceTempView("source");
