@@ -1,5 +1,4 @@
 # migration-tracker
 database migration tracker for capital one
-testy from chris
-lil testy test
-aaaaaaaaaaaaaaaaaa
+build with: "mvn clean compile assembly:single" while in "SimpleFramework" directory
+run with:   "spark-submit --class "SimpleFramework" ./target/simple-framework-1.0-jar-with-dependencies.jar"
