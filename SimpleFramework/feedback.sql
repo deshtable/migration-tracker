@@ -1,1 +1,0 @@
-select * from source_data except select * from quality_data;
