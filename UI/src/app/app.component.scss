@@ -1,0 +1,48 @@
+.container
+{
+  display: flex;
+  flex-direction: column;
+}
+.head
+{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 72px 1fr;
+}
+.stepList
+{
+  display: flex;
+  flex-direction: column;
+}
+
+.get_data
+{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(72px, 8);
+}
+.select_data
+{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 72px 72px;
+}
+.ingest_data
+{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(72px, 8);
+}
+
+.user_buttons
+{
+  display: flex;
+  justify-content: center;
+  column-gap: 40px;
+  padding-bottom: 15px;
+}
+
+.downloads {
+  display: flex;
+  justify-content: center;
+}

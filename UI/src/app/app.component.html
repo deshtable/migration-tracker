@@ -1,0 +1,149 @@
+
+<form [formGroup]="header" class="container"> 
+
+<section class="head">
+<!-- Name -->
+<mat-form-field appearance="fill" style="grid-column: 1 / 2; grid-row: 1 / 2; margin: 10px 20px"> 
+  <mat-label>Name</mat-label>
+  <input matInput formControlName="name">
+</mat-form-field>
+<!-- Version -->
+<mat-form-field appearance="fill" style="grid-column: 2 / 3; grid-row: 1 / 2; margin: 10px 20px">
+  <mat-label>Version</mat-label>
+  <input matInput formControlName="version">
+</mat-form-field>
+
+<!-- Description -->
+<mat-form-field appearance="fill" style="grid-column: 1 / 3; grid-row: 2 / 3; margin: 0px 20px">
+  <mat-label>Description</mat-label>
+  <textarea matInput formControlName="description"></textarea>
+</mat-form-field>
+</section>
+
+<section style="text-align:center;" formArrayName="steps" class="stepList">
+  <h2 style="font-size:30px;"> Steps </h2>
+  <div *ngFor="let step of steps.controls; let i=index" id="steps-{{ i }}">
+  <ng-container [formGroupName] = "i">
+      <!-- The repeated alias template -->
+      <mat-form-field appearance="legacy">
+      <label for="steps-{{ i }}">Step {{i+1}}: </label>
+      <mat-select id="steps-{{ i }}" formControlName="type" (selectionChange)="updateArr(i)">
+        <mat-option value="get_data">Get Data</mat-option>
+        <mat-option value="select_data">Select Data</mat-option>
+        <mat-option value="ingest_data">Ingest Data</mat-option>
+      </mat-select>
+      </mat-form-field>
+
+      <form *ngIf="step.value.type == 'get_data'" [formGroup] = "step.value.group" class="get_data">
+        <mat-form-field appearance="fill" style="grid-column: 1 / 3; grid-row: 1 / 2; margin: 10px 20px"> 
+          <mat-label>outputTable</mat-label>
+          <input matInput formControlName="outputTable">
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="grid-column: 1 / 3; grid-row: 2 / 3; margin: 10px 20px"> 
+          <mat-label>connectionUriPrefix</mat-label>
+          <input matInput formControlName="connectionUriPrefix">
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="grid-column: 1 / 2; grid-row: 3 / 4; margin: 10px 20px"> 
+          <mat-label>host</mat-label>
+          <input matInput formControlName="host">
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="grid-column: 2 / 3; grid-row: 3 / 4; margin: 10px 20px"> 
+          <mat-label>port</mat-label>
+          <input matInput formControlName="port">
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="grid-column: 1 / 3; grid-row: 4 / 5; margin: 10px 20px"> 
+          <mat-label>database</mat-label>
+          <input matInput formControlName="database">
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="grid-column: 1 / 3; grid-row: 5 / 6; margin: 10px 20px"> 
+          <mat-label>jdbcTable</mat-label>
+          <input matInput formControlName="jdbcTable">
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="grid-column: 1 / 2; grid-row: 6 / 7; margin: 10px 20px"> 
+          <mat-label>userName</mat-label>
+          <input matInput formControlName="userName">
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="grid-column: 2 / 3; grid-row: 6 / 7; margin: 10px 20px"> 
+          <mat-label>password</mat-label>
+          <input matInput formControlName="password">
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="grid-column: 1 / 3; grid-row: 7 / 8; margin: 10px 20px"> 
+          <mat-label>jdbcdriver</mat-label>
+          <input matInput formControlName="jdbcdriver">
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="grid-column: 1 / 3; grid-row: 8 / 9; margin: 10px 20px"> 
+          <mat-label>jdbcSelectFields</mat-label>
+          <input matInput formControlName="jdbcSelectFields">
+        </mat-form-field>
+      </form>
+
+      <form *ngIf="step.value.type == 'select_data'" [formGroup] = "step.value.group" class="select_data">
+        <mat-form-field appearance="fill" style="grid-column: 1 / 2; grid-row: 1 / 2; margin: 10px 20px"> 
+          <mat-label>outputTable</mat-label>
+          <input matInput formControlName="outputTable">
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="grid-column: 1 / 2; grid-row: 2 / 3; margin: 10px 20px"> 
+          <mat-label>queryFileURL</mat-label>
+          <input matInput formControlName="queryFileURL">
+        </mat-form-field>
+      </form>
+
+      <form *ngIf="step.value.type == 'ingest_data'" [formGroup] = "step.value.group" class="ingest_data">
+              <mat-form-field appearance="fill" style="grid-column: 1 / 3; grid-row: 1 / 2; margin: 10px 20px"> 
+          <mat-label>inputTable</mat-label>
+          <input matInput formControlName="inputTable">
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="grid-column: 1 / 3; grid-row: 2 / 3; margin: 10px 20px"> 
+          <mat-label>connectionUriPrefix</mat-label>
+          <input matInput formControlName="connectionUriPrefix">
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="grid-column: 1 / 2; grid-row: 3 / 4; margin: 10px 20px"> 
+          <mat-label>host</mat-label>
+          <input matInput formControlName="host">
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="grid-column: 2 / 3; grid-row: 3 / 4; margin: 10px 20px"> 
+          <mat-label>port</mat-label>
+          <input matInput formControlName="port">
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="grid-column: 1 / 3; grid-row: 4 / 5; margin: 10px 20px"> 
+          <mat-label>database</mat-label>
+          <input matInput formControlName="database">
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="grid-column: 1 / 3; grid-row: 5 / 6; margin: 10px 20px"> 
+          <mat-label>jdbcTable</mat-label>
+          <input matInput formControlName="jdbcTable">
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="grid-column: 1 / 2; grid-row: 6 / 7; margin: 10px 20px"> 
+          <mat-label>userName</mat-label>
+          <input matInput formControlName="userName">
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="grid-column: 2 / 3; grid-row: 6 / 7; margin: 10px 20px"> 
+          <mat-label>password</mat-label>
+          <input matInput formControlName="password">
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="grid-column: 1 / 3; grid-row: 7 / 8; margin: 10px 20px"> 
+          <mat-label>jdbcdriver</mat-label>
+          <input matInput formControlName="jdbcdriver">
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="grid-column: 1 / 3; grid-row: 8 / 9; margin: 10px 20px"> 
+          <mat-label>jdbcSelectFields</mat-label>
+          <input matInput formControlName="jdbcSelectFields">
+        </mat-form-field>
+      </form>
+      </ng-container>
+  </div>
+
+</section>
+
+</form>
+<!-- Steps -->
+<section class="user_buttons">
+<button mat-fab color ="primary" (click)="addStep()"> <mat-icon>add_to_queue</mat-icon></button>
+<button mat-fab color ="warn" (click)="removeStep()"> <mat-icon>remove_from_queue</mat-icon></button>
+</section>
+<!--Download-->
+<h2 style="font-size:30px;text-align:center;"> Download </h2>
+<section class = "downloads">
+<button mat-fab color ="" (click)="download()"> <mat-icon>file_download</mat-icon></button>
+</section>
+<router-outlet></router-outlet>
